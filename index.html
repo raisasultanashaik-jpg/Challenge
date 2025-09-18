@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Education Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      background: #f4f6f9;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: #2c3e50;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: #fff;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background: #34495e;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .card h3 {
+      margin: 10px 0;
+      color: #2c3e50;
+    }
+
+    /* Chart */
+    canvas {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>EduDash</h2>
+    <a href="#">🏠 Home</a>
+    <a href="#">📘 Courses</a>
+    <a href="#">👩‍🎓 Students</a>
+    <a href="#">📊 Performance</a>
+  </div>
+
+  <!-- Main content -->
+  <div class="main">
+    <h1>Education Dashboard</h1>
+    <div class="cards">
+      <div class="card">
+        <h3>120</h3>
+        <p>Courses</p>
+      </div>
+      <div class="card">
+        <h3>450</h3>
+        <p>Students</p>
+      </div>
+      <div class="card">
+        <h3>85%</h3>
+        <p>Pass Rate</p>
+      </div>
+      <div class="card">
+        <h3>15</h3>
+        <p>Teachers</p>
+      </div>
+    </div>
+
+    <h2>Performance Overview</h2>
+    <canvas id="myChart" width="600" height="300"></canvas>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Simple chart using Canvas API
+    const canvas = document.getElementById('myChart');
+    const ctx = canvas.getContext('2d');
+
+    // Data
+    const labels = ["Math", "Science", "English", "History", "IT"];
+    const values = [80, 90, 70, 65, 95];
+
+    // Draw chart
+    const barWidth = 80;
+    const gap = 40;
+    const base = 250;
+
+    ctx.fillStyle = "#2c3e50";
+    ctx.font = "16px Arial";
+    ctx.fillText("Subjects Performance (%)", 180, 20);
+
+    values.forEach((val, i) => {
+      const x = 60 + i * (barWidth + gap);
+      const height = (val / 100) * 200;
+      ctx.fillStyle = "#3498db";
+      ctx.fillRect(x, base - height, barWidth, height);
+
+      ctx.fillStyle = "#2c3e50";
+      ctx.fillText(labels[i], x + 15, base + 20);
+      ctx.fillText(val + "%", x + 15, base - height - 10);
+    });
+  </script>
+
+</body>
+</html>
